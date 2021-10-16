@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<managed-bean>
+		<managed-bean-name>projectManager</managed-bean-name>
+		<managed-bean-class>knight.beans.ProjectManager</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+<converter>
+  <converter-id>CCNumberConverter</converter-id>
+  <converter-class>knight.converters.CCNumberConverter</converter-class>
+  </converter>
+  
+  <validator>
+  <validator-id>CCExpiryValidator</validator-id>
+  <validator-class>knight.validators.CCExpiryValidator</validator-class>
+  </validator>
+  
+  <component>
+  <component-type>eshop.inputEntry</component-type>
+  <component-class>eshop.components.InputEntryComponent</component-class>
+  </component>
+  
+ <render-kit>
+  <renderer>
+    <component-family>knight.inputEntry</component-family>
+    <renderer-type>knight.inputEntry</renderer-type>
+    <renderer-class>knight.renderers.InputEntryRenderer</renderer-class>
+    </renderer>
+  </render-kit>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>listFoods</from-outcome>
+			<to-view-id>/jsp/ListFoods.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>showFood</from-outcome>
+			<to-view-id>/jsp/FoodDetails.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>showCart</from-outcome>
+			<to-view-id>/jsp/Cart.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>checkOut</from-outcome>
+			<to-view-id>/jsp/CheckOut.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>orderConfirmation</from-outcome>
+			<to-view-id>/jsp/OrderConfirmation.jspx</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	
+</faces-config>
+	

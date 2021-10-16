@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" version="2.1">
+	<jsp:directive.page language="java"
+		contentType="application/xhtml+xml;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+	<c:url var="cssUrl" value="/css/knight.jspx"/>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Shopping Cart</title>
+<link rel="stylesheet" href="${cssUrl}" type="text/css"/>
+</head>
+<body>
+  <f:view>
+    <h:form>
+      <jsp:include page="TopModule.jspx" flush="true"/>
+      <jsp:include page="LeftModule.jspx" flush="true"/>
+      <h:panelGrid styleClass="content">
+        <h:outputText styleClass="content content_h2" value="Shopping Cart"/>
+        <h:outputText
+            styleClass="info block"
+            value="The Shopping cart is empty."
+            rendered="#{projectManager.shoppingCartEmpty}"
+            />
+        <h:panelGroup rendered="#{!projectManager.shoppingCartEmpty}">
+          <h:dataTable value="#{projectManager.shoppingCart}" var="item">
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Name"></h:outputText>
+                </f:facet>
+              <h:outputText value="#{item.name}"/>
+              </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Description"></h:outputText>
+                </f:facet>
+              <h:outputText value="#{item.description}"/>
+              </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Price"></h:outputText>
+                </f:facet>
+              <h:outputText value="#{item.price}"/>
+              </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Quantity"></h:outputText>
+                </f:facet>
+              <h:inputText id="quantity" value="#{item.quantity}" size="2"
+                  required="true"
+                  requiredMessage="What? Nothing?"
+                  converterMessage="An integer, please!"
+                  validatorMessage="At least one copy!"
+                  >
+                <f:validateLongRange minimum="1"/>
+                </h:inputText>
+              <h:commandButton action="#{projectManager.updateItem}"
+                value="Update"/>
+              <f:verbatim><br/></f:verbatim>
+              <h:message for="quantity" styleClass="error"/>
+              </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Subtotal"></h:outputText>
+                </f:facet>
+              <h:outputText value="#{item.subtotal}"/>
+              </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Delete"></h:outputText>
+                </f:facet>
+              <h:commandButton action="#{projectManager.deleteItem}"
+                value="Delete"/>
+              </h:column>
+            </h:dataTable>
+          <h:outputText value="Total: #{projectManager.orderTotal}"
+              styleClass="content total"/>
+          <h:commandLink action="checkOut" value="Check Out"
+              styleClass="content center link1"/>
+          </h:panelGroup>
+        </h:panelGrid>
+      </h:form>
+    </f:view>
+  </body>
+	</html>
+</jsp:root>

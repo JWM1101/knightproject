@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" version="2.1">
+	<jsp:directive.page language="java"
+		contentType="application/xhtml+xml;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+	<c:url var="cssUrl" value="/css/knight.jspx" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>List Foods Page</title>
+<link rel="stylesheet" href="${cssUrl}" type="text/css" />
+</head>
+<body>
+  <f:view>
+    <h:form>
+      <jsp:include page="TopModule.jspx" flush="true"/>
+      <jsp:include page="LeftModule.jspx" flush="true"/>
+      <h:panelGrid styleClass="content">
+        <h:panelGroup rendered="#{projectManager.categoryName == null}">
+          <h:outputText styleClass="content content_h2"
+              value="Search results"/>
+          </h:panelGroup>
+        <h:panelGroup rendered="#{projectManager.categoryName != null}">
+          <h:outputText styleClass="content content_h2"
+            value="Select Catalog"/>
+          <h:panelGroup style="font-size: 14px">
+            <h:outputText value="Category: "/>
+            <h:outputText style="font-weight: bolder"
+                value="#{projectManager.categoryName}"/>
+            </h:panelGroup>
+          </h:panelGroup>
+        <h:panelGroup
+          styleClass="info block"
+          rendered="#{projectManager.foods.rowCount == 0}"
+          >
+          <h:outputText value="No foods found."/>
+          </h:panelGroup>
+        <h:dataTable rendered="#{projectManager.foods.rowCount > 0}"
+            value="#{projectManager.foods}" var="food">
+          <h:column>
+            <f:facet name="header"><h:outputText value="Name"/></f:facet>
+            <h:outputText value="#{food.name}"/>
+            </h:column>
+          <h:column>
+            <f:facet name="header"><h:outputText value="Description"/></f:facet>
+            <h:outputText value="#{food.description}"/>
+            </h:column>
+          <h:column>
+            <f:facet name="header"><h:outputText value="Price"/></f:facet>
+            <h:outputText value="#{food.price}"/>
+            </h:column>
+          <h:column>
+            <f:facet name="header"><h:outputText value="Details"/></f:facet>
+            <h:commandLink action="#{projectManager.selectFood}"
+                styleClass="link1">
+              <h:outputText value="Details"/>
+              </h:commandLink>
+            </h:column>
+          </h:dataTable>
+        </h:panelGrid>
+      </h:form>
+    </f:view>
+  </body>
+	</html>
+</jsp:root>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.1">
+	<jsp:directive.page language="java"
+		contentType="application/xhtml+xml;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+
+	<c:url var="cssUrl" value="/css/knight.jspx" />
+
+
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Welcome Page</title>
+<link rel="stylesheet" href="${cssUrl}" type="text/css" />
+</head>
+<body>
+	<f:view>
+		<h:form>
+			<jsp:include page="TopModule.jspx" flush="true" />
+			<jsp:include page="LeftModule.jspx" flush="true" />
+		</h:form>
+		<div class="content">
+			<h1>Best Pizza and Wings in Middle Georgia!!</h1>
+			<p>Welcome to our website! You can order your favorite items
+				online. Please use the search box to search for your items, or
+				select the category. You can pay securely through our website after
+				selecting your items.</p>
+		</div>
+	</f:view>
+</body>
+	</html>
+</jsp:root>
